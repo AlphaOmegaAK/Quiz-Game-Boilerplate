@@ -5,9 +5,13 @@ startBtn.addEventListener('click', start);
 // ? Questions Container
 const questionContEl = document.getElementById('question-container');
 
-
+//  Question element
+const questionEl = document.getElementById('question');
+const answerBtnsEl = document.getElementById('answer-btns')
 // Questions - Shuffle (undefined is what we need)
-const shuffleQuestions, currQuestionIdx
+let shuffleQuestions, currQuestionIdx
+
+const nextBtn = document.getElementById('next-btn')
 
 function start() {
     console.log("Started");
@@ -23,17 +27,45 @@ function start() {
 };
 
 function nextQues() {
+    resetState()
+
+    showQues(shuffleQuestions[currQuestionIdx]);
 
 };
 
+function showQues(question) {
+    questionEl.innerText = question.question
+    question.answers.forEach(answer => {
+        const button = document.createElement('button')
+        button.innerText = answer.text;
+        button.classList.add('btn');
+        if (answer.correct) {
+            button.dataset.correct = answer.correct;
+        }
+        button.addEventListener('click', selAnswer);
+        answerBtnsEl.appendChild(button);
+    })
+
+}
+
+function resetState() {
+    nextBtn.classList.add('hide')
+
+    while (answerBtnsEl.firstChild) {
+        answerBtnsEl.removeChild(answerBtnsEl.firstChild)
+    }
+}
+
 function selAnswer() {
+
 
 };
 
 const questions = [{
     question: "What is 2 + 2?",
     answers: [{
-            text: '4, correct: true'
+            text: '4',
+            correct: 'true'
         },
         {
             text: '22',
@@ -49,3 +81,8 @@ const questions = [{
 //- Shuffle Questions - setting the shuffled question to the shuffled array, so we take the current question array and sort it which takes a function, if its a negative number it is going ot sort it certain way, if positive a different way. if random number of below or above zero, using math,random() which will give us a number between 1 and 0, if you subtract .5 that will give us number above or below zero 50% of the time which gives us the random questions,
 
 // Then we set the question array index at zero to start us at the beginning of the questions list 
+
+
+// Only setting the data attribute so that it is easier to see which answers were correct, due to us getting back a string and not a boolean
+
+// While loop - loop through all the answer element buttons if there is a child in the answere btn element then remove them
