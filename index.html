@@ -3,14 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Main Style Sheet -->
     <link rel="stylesheet" href="./css/style.css" />
-    <script src="./js/script.js"></script>
+    <!-- Main Script -->
+    <script defer src="./js/script.js"></script>
+    <!-- Fonts Style Sheet -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Righteous&display=swap"
+      rel="stylesheet"
+    />
 
     <title>Quiz App</title>
   </head>
   <body>
     <div class="container">
-      <div class="question-container" class="hide">
+      <div id="question-container" class="hide">
         <div id="question">Question</div>
         <div id="answer-btns" class="btn-grid">
           <button class="btn">Answer 1</button>
@@ -19,8 +26,10 @@
           <button class="btn">Answer 4</button>
         </div>
       </div>
-      <button id="start-btn" class="start-btn">Start</button>
-      <button id="next-btn" class="next-btn">Next</button>
+      <div class="controls">
+        <button id="start-btn" class="start-btn">Start</button>
+        <button id="next-btn" class="next-btn hide">Next</button>
+      </div>
     </div>
   </body>
 </html>
