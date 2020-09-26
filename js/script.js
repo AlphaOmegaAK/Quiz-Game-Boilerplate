@@ -7,9 +7,9 @@ const questionContEl = document.getElementById('question-container');
 
 //  Question element
 const questionEl = document.getElementById('question');
-const answerBtnsEl = document.getElementById('answer-btns')
+const answerBtnsEl = document.getElementById('answer-btns');
 // Questions - Shuffle (undefined is what we need)
-let shuffleQuestions, currQuestionIdx
+let shuffleQuestions, currQuestionIdx;
 
 const nextBtn = document.getElementById('next-btn')
 
@@ -20,7 +20,7 @@ function start() {
     shuffleQuestions = questions.sort(() => Math.random() - .5);
     currQuestionIdx = 0;
 
-    questionContEl.classList.remove('hide')
+    questionContEl.classList.remove('hide');
 
     // Starts showing questions
     nextQues();
@@ -46,18 +46,41 @@ function showQues(question) {
         answerBtnsEl.appendChild(button);
     })
 
-}
+};
 
 function resetState() {
     nextBtn.classList.add('hide')
 
     while (answerBtnsEl.firstChild) {
-        answerBtnsEl.removeChild(answerBtnsEl.firstChild)
+        answerBtnsEl.removeChild(answerBtnsEl.firstChild);
+
     }
-}
+};
 
-function selAnswer() {
+function selAnswer(e) {
+    const selectBtn = e.target;
+    const correct = selectBtn.dataset.correct;
+    setStatusClass(document.body, correct);
+    // Array gives us a live listing, which isn't necessarily a true "array" so we convert it to one
+    Array.from(answerBtnsEl.children).forEach(button => {
+        setStatusClass(button, button.dataset.correct);
+        // set the data based on if that answer was correct
+    });
+    nextBtn.classList.remove('hide')
+};
 
+function setStatusClass(element, correct) {
+    clearStatusClass(element)
+    if (correct) {
+        element.classList.add('correct');
+    } else {
+        element.classList.add('wrong');
+    }
+};
+
+function clearStatusClass(element) {
+    element.classList.remove('correct');
+    element.classList.remove('wrong');
 
 };
 
@@ -72,7 +95,7 @@ const questions = [{
             correct: false
         }
     ]
-}]
+}];
 
 
 
@@ -85,4 +108,4 @@ const questions = [{
 
 // Only setting the data attribute so that it is easier to see which answers were correct, due to us getting back a string and not a boolean
 
-// While loop - loop through all the answer element buttons if there is a child in the answere btn element then remove them
+// While loop - loop through all the answer element buttons if there is a child in the answer btn element then remove them
