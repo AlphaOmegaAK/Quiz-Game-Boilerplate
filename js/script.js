@@ -51,17 +51,18 @@ function showQues(question) {
         }
         button.addEventListener('click', selAnswer);
         answerBtnsEl.appendChild(button);
-    })
+    });
 
 };
 
 function resetState() {
-    nextBtn.classList.add('hide')
+    cleaStatusClass(documen.body);
+    nextBtn.classList.add('hide');
 
     while (answerBtnsEl.firstChild) {
         answerBtnsEl.removeChild(answerBtnsEl.firstChild);
 
-    }
+    };
 };
 
 function selAnswer(e) {
@@ -73,7 +74,13 @@ function selAnswer(e) {
         setStatusClass(button, button.dataset.correct);
         // set the data based on if that answer was correct
     });
-    nextBtn.classList.remove('hide')
+    if (shuffleQuestions.length > currQuestionIdx + 1) {
+        nextBtn.classList.remove('hide')
+
+    } else {
+        startBtn.innerText = 'Restart';
+        startBtn.classList.remove('hide');
+    }
 };
 
 function setStatusClass(element, correct) {
@@ -92,17 +99,50 @@ function clearStatusClass(element) {
 };
 
 const questions = [{
-    question: "What is 2 + 2?",
-    answers: [{
-            text: '4',
-            correct: 'true'
-        },
-        {
-            text: '22',
-            correct: false
-        }
-    ]
-}];
+        question: "What is 2 + 2?",
+        answers: [{
+                text: '4',
+                correct: 'true'
+            },
+            {
+                text: '22',
+                correct: false
+            }
+        ],
+    },
+    {
+        question: "What is 2 + 8?",
+        answers: [{
+                text: '8',
+                correct: 'true'
+            },
+            {
+                text: '10',
+                correct: false
+            }
+        ],
+    }
+
+    , {
+        question: "What does RGB stand for?",
+        answers: [{
+                text: 'Roger, George, Bob',
+                correct: false
+            },
+            {
+                text: '22',
+                correct: false
+            },
+            {
+                text: 'Red, Green, Blue',
+                correct: true
+            }
+        ],
+
+
+
+    }
+];
 
 
 
