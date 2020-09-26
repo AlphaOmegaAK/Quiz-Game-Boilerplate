@@ -2,6 +2,8 @@
 const startBtn = document.getElementById('start-btn');
 startBtn.addEventListener('click', start);
 
+
+
 // ? Questions Container
 const questionContEl = document.getElementById('question-container');
 
@@ -11,7 +13,12 @@ const answerBtnsEl = document.getElementById('answer-btns');
 // Questions - Shuffle (undefined is what we need)
 let shuffleQuestions, currQuestionIdx;
 
+//? Next Button
 const nextBtn = document.getElementById('next-btn')
+nextBtn.addEventListener('click', () => {
+    currQuestionIdx++;
+    nextQues();
+})
 
 function start() {
     console.log("Started");
